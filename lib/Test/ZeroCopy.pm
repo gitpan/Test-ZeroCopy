@@ -2,7 +2,7 @@ package Test::ZeroCopy;
 
 use strict;
 
-our $VERSION = '0.100';
+our $VERSION = '0.110';
 
 require XSLoader;
 XSLoader::load('Test::ZeroCopy', $VERSION);
@@ -14,7 +14,7 @@ our @EXPORT = qw(is_zerocopy isnt_zerocopy);
 sub _impl {
   my $tb = __PACKAGE__->builder;
 
-  my $desc = $_[2];
+  my $desc = $_[2] || '';
   my $want_zerocopy = $_[3];
 
   my $addr1 = get_pv_address($_[0]);
@@ -42,13 +42,13 @@ sub _impl {
 }
 
 sub is_zerocopy {
-  $_[2] = '' if !defined $_[2];
-  _impl(@_, 1);
+  $_[3] = 1;
+  goto &_impl;
 }
 
 sub isnt_zerocopy {
-  $_[2] = '' if !defined $_[2];
-  _impl(@_, 0);
+  $_[3] = 0;
+  goto &_impl;
 }
 
 

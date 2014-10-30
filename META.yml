@@ -22,4 +22,4 @@ requires: {}
 resources:
   bugtracker: https://github.com/hoytech/Test-ZeroCopy/issues
   repository: git://github.com/hoytech/Test-ZeroCopy.git
-version: 0.100
+version: 0.110
